@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ogohlantirish!</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-size: 24px;
+        }
+        #warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 40px;
+            font-weight: bold;
+            z-index: 9999;
+        }
+        #exitBtn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 24px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #exitBtn:hover {
+            background: darkred;
+        }
+    </style>
+    <script>
+        function showWarning() {
+            let warningDiv = document.createElement("div");
+            warningDiv.id = "warning";
+            warningDiv.innerHTML = "‼️ OG'OHLANTIRISH! ‼️ <br> Sizda katta qarz mavjud! <br> <br> <span style='color:white;'>To'lovni amalga oshiring yoki sizga jiddiy choralar ko'riladi!</span>";
+            
+            let exitButton = document.createElement("button");
+            exitButton.id = "exitBtn";
+            exitButton.innerText = "Chiqish";
+            exitButton.onclick = function() {
+                document.body.removeChild(warningDiv);
+                audio.pause();
+                clearInterval(alertInterval);
+            };
+
+            warningDiv.appendChild(exitButton);
+            document.body.appendChild(warningDiv);
+
+            // Orqa fonda tovush chiqarish
+            let audio = new Audio("https://www.myinstants.com/media/sounds/error.mp3");
+            audio.loop = true;
+            audio.play();
+
+            // Har 3 sekundda yana alert chiqsin
+            let alertInterval = setInterval(() => {
+                alert("‼️ OG'OHLANTIRISH! ‼️ Sizda katta qarz mavjud! To'lovni amalga oshiring!");
+            }, 3000);
+        }
+    </script>
+</head>
+<body onload="showWarning()">
+    <h1>Qarzini to‘lang!</h1>
+</body>
+</html>
