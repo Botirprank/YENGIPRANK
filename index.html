@@ -1,77 +1,58 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ogohlantirish!</title>
+    <title>SCARY PAGE</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
         body {
-            background-color: black;
+            background: black;
             color: red;
+            font-family: 'Creepster', cursive;
             text-align: center;
-            font-size: 24px;
+            overflow: hidden;
         }
-        #warning {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: red;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            font-size: 40px;
-            font-weight: bold;
-            z-index: 9999;
+        h1 {
+            font-size: 50px;
+            text-shadow: 2px 2px 10px red;
+            animation: shake 0.5s infinite alternate;
         }
-        #exitBtn {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 24px;
-            background: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
+        @keyframes shake {
+            0% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
         }
-        #exitBtn:hover {
-            background: darkred;
+        .ghost {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-20px); }
         }
     </style>
-    <script>
-        function showWarning() {
-            let warningDiv = document.createElement("div");
-            warningDiv.id = "warning";
-            warningDiv.innerHTML = "‼️ OG'OHLANTIRISH! ‼️ <br> Sizda katta qarz mavjud! <br> <br> <span style='color:white;'>To'lovni amalga oshiring yoki sizga jiddiy choralar ko'riladi!</span>";
-            
-            let exitButton = document.createElement("button");
-            exitButton.id = "exitBtn";
-            exitButton.innerText = "Chiqish";
-            exitButton.onclick = function() {
-                document.body.removeChild(warningDiv);
-                audio.pause();
-                clearInterval(alertInterval);
-            };
-
-            warningDiv.appendChild(exitButton);
-            document.body.appendChild(warningDiv);
-
-            // Orqa fonda tovush chiqarish
-            let audio = new Audio("https://www.myinstants.com/media/sounds/error.mp3");
-            audio.loop = true;
-            audio.play();
-
-            // Har 3 sekundda yana alert chiqsin
-            let alertInterval = setInterval(() => {
-                alert("‼️ OG'OHLANTIRISH! ‼️ Sizda katta qarz mavjud! To'lovni amalga oshiring!");
-            }, 3000);
-        }
-    </script>
 </head>
-<body onload="showWarning()">
-    <h1>Qarzini to‘lang!</h1>
+<body>
+    <h1>😈 Welcome to the Nightmare 😈</h1>
+    <img class="ghost" src="https://i.gifer.com/origin/76/7647c73b40326ec67cc598b340bfd73b_w200.gif" alt="Ghost">
+    
+    <!-- Qo‘rqinchli audio avtomatik o‘ynaydi -->
+    <audio id="scary-audio" autoplay loop>
+        <source src="https://www.fesliyanstudios.com/play-mp3/6667" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+        // Agar brauzer autoplayni bloklasa, sahifa bosilganda audio o‘ynasin
+        document.addEventListener('click', function() {
+            document.getElementById('scary-audio').play();
+        });
+    </script>
 </body>
 </html>
